@@ -1,3 +1,44 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+#mesAno {
+  max-width: 300px;
+  margin: 0 auto 20px;
+}
+
+.modal-header {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-title {
+  font-weight: 700;
+}
+
+.modal-body {
+  padding: 30px;
+}
+
+.grafico-pizza {
+  margin-bottom: 20px;
+}
+
+.modal-footer {
+  justify-content: center;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
 #relatorio {
   position: relative;
   width: 150%;
