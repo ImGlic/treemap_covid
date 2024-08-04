@@ -1,0 +1,52 @@
+#relatorio {
+  position: relative;
+  width: 150%;
+  height: 500%;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+}
+
+.node {
+  position: absolute;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.node .estado-name {
+  font-weight: bold;
+}
+
+.node .casos {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.node .percentage {
+  font-size: 10px;
+  color: #ddd;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+
+.grafico-pizza {
+  position: relative;
+  width: 40%;
+  height: 200px;
+}
