@@ -1,18 +1,18 @@
-const estados = [
+var estados = [
   "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG",
   "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
 ];
 
-const meses = Array.from({ length: 12 }, (_, i) => formatMonth(2023, i));
+var meses = Array.from({ length: 12 }, (_, i) => formatMonth(2023, i));
 
 function formatMonth(year, mes) {
   return `${String(mes + 1).padStart(2, "0")}/${year}`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const mesAno = document.getElementById("mesAno");
+  var mesAno = document.getElementById("mesAno");
   meses.forEach(mes => {
-    const opcao = document.createElement("option");
+    var opcao = document.createElement("option");
     opcao.value = mes;
     opcao.textContent = mes;
     mesAno.appendChild(opcao);
@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let mesDataAux = [];
 
-  const data2023 = {};
+  var data2023 = {};
 
   estados.forEach(estado => {
     data2023[estado] = meses.map(mes => {
-      const casos = Math.floor(Math.random() * 2000) + 500;
-      const vacinacao = Math.floor(Math.random() * 5000) + 1000;
-      const mortes = Math.floor(Math.random() * 200) + 50;
+      var casos = Math.floor(Math.random() * 2000) + 500;
+      var vacinacao = Math.floor(Math.random() * 5000) + 1000;
+      var mortes = Math.floor(Math.random() * 200) + 50;
 
       return {
         mes,
@@ -60,11 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let previousMonthData = null;
 
   function carregaTreeMap() {
-    const selectedMonth = document.getElementById("mesAno").value;
+    var selectedMonth = document.getElementById("mesAno").value;
     if (!selectedMonth) return;
 
-    const filteredData = estados.map(estado => {
-      const monthlyData = data2023[estado].find(dadoEstado => dadoEstado.mes === selectedMonth);
+    var filteredData = estados.map(estado => {
+      var monthlyData = data2023[estado].find(dadoEstado => dadoEstado.mes === selectedMonth);
       return {
         estado,
         vacinacao: monthlyData ? monthlyData.vacinacao : 0,
@@ -79,9 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (selectedMonth !== meses[0]) {
-      const mesSelecionado = meses[meses.indexOf(selectedMonth) - 1];
+      var mesSelecionado = meses[meses.indexOf(selectedMonth) - 1];
       mesDataAux = estados.map(estado => {
-        const dadosMensais = data2023[estado].find(dadoEstado => dadoEstado.mes === mesSelecionado);
+        var dadosMensais = data2023[estado].find(dadoEstado => dadoEstado.mes === mesSelecionado);
         return {
           estado,
           casos: dadosMensais ? dadosMensais.casos : 0,
@@ -89,10 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    const periodoAnteriorData = filteredData.map(dadoEstado => {
-      const dadosPrevistos = mesDataAux.find(pd => pd.estado === dadoEstado.estado);
-      const qtdCasosAnterior = dadosPrevistos ? dadosPrevistos.casos : 0;
-      const diferencaPorcentagem = qtdCasosAnterior === 0 ? (dadoEstado.casos > 0 ? 100 : 0) : ((dadoEstado.casos - qtdCasosAnterior) / qtdCasosAnterior) * 100;
+    var periodoAnteriorData = filteredData.map(dadoEstado => {
+      var dadosPrevistos = mesDataAux.find(pd => pd.estado === dadoEstado.estado);
+      var qtdCasosAnterior = dadosPrevistos ? dadosPrevistos.casos : 0;
+      var diferencaPorcentagem = qtdCasosAnterior === 0 ? (dadoEstado.casos > 0 ? 100 : 0) : ((dadoEstado.casos - qtdCasosAnterior) / qtdCasosAnterior) * 100;
       return {
         ...dadoEstado,
         diferencaPorcentagem: diferencaPorcentagem.toFixed(2),
@@ -105,22 +105,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function criarTreeMap(data) {
-    const relatorio = document.getElementById("relatorio");
+    var relatorio = document.getElementById("relatorio");
     relatorio.innerHTML = "";
-    const totalCases = data.reduce((sum, dadoEstado) => sum + dadoEstado.casos, 0);
-    const maxCases = data[data.length - 1].casos;
-    const width = relatorio.clientWidth;
-    const height = relatorio.clientHeight;
+    var totalCases = data.reduce((sum, dadoEstado) => sum + dadoEstado.casos, 0);
+    var maxCases = data[data.length - 1].casos;
+    var width = relatorio.clientWidth;
+    var height = relatorio.clientHeight;
 
     let x = 0;
     let y = 0;
     let ga = 0;
 
     data.forEach(dadoEstado => {
-      const casos = dadoEstado.casos;
-      const area = (casos / totalCases) * (width * height);
-      const rectWidth = Math.sqrt(area * (width / height));
-      const rectHeight = area / rectWidth;
+      var casos = dadoEstado.casos;
+      var area = (casos / totalCases) * (width * height);
+      var rectWidth = Math.sqrt(area * (width / height));
+      var rectHeight = area / rectWidth;
 
       if (x + rectWidth > width) {
         x = 0;
@@ -128,12 +128,12 @@ document.addEventListener("DOMContentLoaded", () => {
         ga = 0;
       }
 
-      const colorRatio = casos / maxCases;
-      const red = Math.floor(255 * colorRatio);
-      const green = Math.floor(255 * (1 - colorRatio));
-      const backgroundColor = `rgb(${red}, ${green}, 0)`;
+      var colorRatio = casos / maxCases;
+      var red = Math.floor(255 * colorRatio);
+      var green = Math.floor(255 * (1 - colorRatio));
+      var backgroundColor = `rgb(${red}, ${green}, 0)`;
 
-      const node = document.createElement("div");
+      var node = document.createElement("div");
       node.className = "node";
       node.style.width = `${rectWidth}px`;
       node.style.height = `${rectHeight}px`;
@@ -162,13 +162,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let graficoMortes = null;
 
   function abrirModal(dadoEstado) {
-    const casosGraficoAux = document.getElementById("casosGrafico").getContext("2d");
-    const vacinacaoGraficoAux = document.getElementById("vacinacaoGrafico").getContext("2d");
-    const mortesGraficoAux = document.getElementById("mortesGrafico").getContext("2d");
-    const campoQuantidadeCasos = document.getElementById("qtdCasos");
-    const campoQuantidadeVacinacao = document.getElementById("qtdVacinacao");
-    const campoQuantidadeMortes = document.getElementById("qtdMortes");
-    const modalTitle = document.getElementById("infoModalLabel");
+    var casosGraficoAux = document.getElementById("casosGrafico").getContext("2d");
+    var vacinacaoGraficoAux = document.getElementById("vacinacaoGrafico").getContext("2d");
+    var mortesGraficoAux = document.getElementById("mortesGrafico").getContext("2d");
+    var campoQuantidadeCasos = document.getElementById("qtdCasos");
+    var campoQuantidadeVacinacao = document.getElementById("qtdVacinacao");
+    var campoQuantidadeMortes = document.getElementById("qtdMortes");
+    var modalTitle = document.getElementById("infoModalLabel");
 
     modalTitle.innerHTML = `Informações do Estado - ${dadoEstado.estado}`;
 
@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
           tooltip: {
             callbacks: {
               label: function (tooltipItem) {
-                const value = tooltipItem.raw;
+                var value = tooltipItem.raw;
                 return `${tooltipItem.label}: ${value.toFixed(2)} (${((value / dadoEstado.casos) * 100).toFixed(2)}%)`;
               },
             },
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
           tooltip: {
             callbacks: {
               label: function (tooltipItem) {
-                const value = tooltipItem.raw;
+                var value = tooltipItem.raw;
                 return `${tooltipItem.label}: ${value.toFixed(2)} (${((value / dadoEstado.vacinacao) * 100).toFixed(2)}%)`;
               },
             },
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
           tooltip: {
             callbacks: {
               label: function (tooltipItem) {
-                const value = tooltipItem.raw;
+                var value = tooltipItem.raw;
                 return `${tooltipItem.label}: ${value.toFixed(2)} (${((value / dadoEstado.mortes) * 100).toFixed(2)}%)`;
               },
             },
