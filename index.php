@@ -25,7 +25,7 @@
     </div>
 
     <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document" style="margin-top: 20vh;">
+        <div class="modal-dialog modal-lg" role="document" style="margin-top: 15vh;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="infoModalLabel">Informações do Estado</h5>
